@@ -1,0 +1,115 @@
+{% extends 'navbar.html' %}
+{% block content %}
+{% load static %}
+  <div class="card pt-0 mt-3 pb-5" style="background-color: rgba(255, 255, 255, 0.057);text-align: center;">
+      <div class="card-deck mt-5 ml-3 mr-3">
+          <div class="card" style="text-align: center;background-color: rgba(255, 255, 255, 0.676);">
+            <img class="card-img-top" src="{% static 'images/img666.jpg' %}" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Add a Course</h5></div>
+            <div class="card-footer" style="text-align: center;">
+              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#courseModal">Add a Course</button>
+            </div>
+          </div>
+          <div class="card" style="text-align: center;background-color: rgba(255, 255, 255, 0.676);">
+            <img class="card-img-top" src="{% static 'images/img667.png' %}" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Add Student</h5></div>
+            <div class="card-footer" style="text-align: center;">
+              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#studentModal">Add Student</button>
+            </div>
+          </div>
+          <div class="card" style="text-align: center;background-color: rgba(255, 255, 255, 0.676);">
+            <img class="card-img-top" src="{% static 'images/img1000.jpg' %}" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Show Teachers</h5></div>
+            <div class="card-footer" style="text-align: center;">
+              <a type="button" class="btn btn-success" href="{% url 'show_tcr' %}">Click here</a>
+            </div>
+          </div>
+          <div class="card" style="text-align: center;background-color: rgba(255, 255, 255, 0.676);">
+            <img class="card-img-top" src="{% static 'images/img999.jpg' %}" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Show Students</h5></div>
+            <div class="card-footer" style="text-align: center;">
+              <a type="button" class="btn btn-success" href="{% url 'show_details' %}">Click here</a>
+            </div>
+          </div>
+          </div>
+    </div>
+      <div class="modal fade" id="courseModal" tabindex="-1" role="dialog" aria-labelledby="courseModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="registerNowModalLabel">ADD COURSE</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form style="text-align: center;" action="{% url 'add_course' %}" method="post">
+                {% csrf_token %}
+                <div class="form-group pt-2">
+                  <input type="text" name="course1" class="form-control" placeholder="Course Name" required>
+                </div>
+                <div class="form-group pt-2">
+                  <input type="number" name="fee1" class="form-control" placeholder="Course Fee" required>
+                </div>
+                <button type="submit" class="btn btn-outline-primary mt-2">Add Course</button>
+              </form>
+          </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="studentModal" tabindex="-1" role="dialog" aria-labelledby="studentModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="registerNowModalLabel">ADD STUDENT</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form style="text-align: center;" action="{% url 'add_stu' %}" method="post" onsubmit="return validateForm()">
+                {% csrf_token %}
+                <div class="form-group pt-2">
+                  <input type="text" name="stuname" class="form-control" placeholder="Student Name" required>
+                </div>
+                <div class="form-group pt-2">
+                  <input type="email" name="stuemail" class="form-control" placeholder="Email Address" required>
+                </div>
+                <div class="form-group pt-2 pb-2">
+                  <input type="number" name="stuage" class="form-control" placeholder="Age" required>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Joining Date:</label>
+                    <div class="col-sm-9">
+                        <input type="date" name="studate" class="form-control" required>
+                    </div>
+                  </div>
+                <div class="form-group pt-2">
+                    <select class="form-control" name="sel" id="productSelect">
+                      <option value="default" disabled selected>Select a course...</option>
+                      {% for i in course %}
+                      <option value="{{i.id}}">{{i.course_name}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                <button type="submit" class="btn btn-outline-primary mt-2">Add to List</button>
+              </form>
+          </div>
+          </div>
+        </div>
+      </div>
+      <script>
+        function validateForm() {
+            var select = document.getElementById("productSelect");
+            if (select.value == "default") {
+                alert("Please select a course...");
+                return false;
+            }
+            return true;
+        }
+      </script>
+{% endblock %}

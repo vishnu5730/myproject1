@@ -1,0 +1,85 @@
+{% extends 'navbar.html' %}
+{% block content %}
+<style>
+  input[type="text"]:focus,
+  input[type="number"]:focus,
+  input[type="email"]:focus,
+  input[type="date"]:focus {
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+  }
+  label {
+    color: white;
+  }
+  input[type="text"], input[type="number"], input[type="email"] {
+    background-color: black;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  option {
+    background-color: black;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  input[type="date"] {
+    background-color: black;
+    color: rgb(255, 255, 255);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+  }
+</style>
+      <div class="card-deck mt-3 pt-4 ml-3 mr-3 pb-2">
+        <div class="card pt-3 mt-0 pb-4 pr-3 pl-3" style="background-color: rgb(33, 33, 33);">
+          <div class="container-fluid mt-3">
+            <h3 class="text pb-3" style="color: white;text-align: center;">EDIT STUDENT DETAILS</h3>
+            <form action="{% url 'edit_stu_details' student.id %}" method="post">
+                {% csrf_token %}
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Student Name</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" value="{{student.student_name}}" name="sname">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Email Id</label>
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" value="{{student.e_address}}" name="semail">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Course</label>
+                    <div class="col-sm-10">
+                      <select class="form-control" name="scourse" style="background-color: black;color: rgb(255, 255, 255);border: 1px solid rgba(255, 255, 255, 0.1);">
+                        {% for i in course %}
+                            {% if i.id == student.course.id %}
+                            <option value="{{i.id}}" selected>{{i.course_name}}</option>
+                            {% else %}
+                            <option value="{{i.id}}">{{i.course_name}}</option>
+                            {% endif %}
+                        {% endfor %}
+                      </select>                    
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Age</label>
+                    <div class="col-sm-10">
+                      <input type="number" class="form-control" value="{{student.student_age}}" name="sage">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Joining Date</label>
+                    <div class="col-sm-10">
+                      <input type="date" class="form-control" value="{{student.joining_date|date:'Y-m-d'}}" name="sdate">
+                    </div>
+                  </div>
+                  <div style="text-align: center;">
+                  <button type="submit" class="btn btn-success mb-1 mt-2">Update</button>
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends 'navbar.html' %}
+{% block content %}
+<style>
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    input[type="email"]:focus,input[type="password"]:focus,input[type="file"]:focus {
+      background-color: black;
+      color: white;
+      border: 1px solid white;
+    }
+    label {
+      color: white;
+    }
+    input[type="text"], input[type="number"], input[type="email"],input[type="password"],input[type="file"] {
+      background-color: black;
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    option {
+      background-color: black;
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  </style>
+      <div class="card-deck mt-3 pt-4 ml-3 mr-3 pb-2">
+        <div class="card pt-3 mt-0 pb-4 pr-3 pl-3" style="background-color: rgb(29, 29, 29);">
+          <div class="container-fluid mt-3">
+            {% for message in messages %}
+                <div class="container" style="text-align: center;">
+                  <h5 class="alert alert-danger mt-0 mb-3" id="message1" style="text-align: center;">
+                    {{message}}
+                  </h5>
+                </div>
+                {% endfor %}
+            <h3 class="text pb-3" style="color: white;text-align: center;">ADD TEACHER</h3>
+            <form style="text-align: left;" action="{% url 'add_tcr' %}" method="post" enctype="multipart/form-data" onsubmit="return handleFormSubmission()">
+                {% csrf_token %}
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <input type="text" name="tfname" class="form-control" placeholder="First Name" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <input type="text" name="tlname" class="form-control" placeholder="Last Name" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input type="email" name="temail" class="form-control" placeholder="Email id" required>
+                </div>
+                  <div class="form-group">
+                    <input type="text" name="tusername" class="form-control" placeholder="Username" required>
+                  </div>
+                  <div class="form-group">
+                    <input type="text" name="tphone" class="form-control" placeholder="Phone No" required>
+                  </div>
+                  <div class="form-group">
+                    <input type="number" name="tage" class="form-control" placeholder="Age" required>
+                  </div>
+                  <div class="form-group">
+                    <input type="text" name="taddress" class="form-control" placeholder="Address" required>
+                  </div>
+                  <div class="form-group">
+                    <input type="password" name="pwd1" class="form-control" placeholder="Password" required>
+                  </div>
+                  <div class="form-group">
+                    <input type="password" name="pwd2" class="form-control" placeholder="Confirm Password" required>
+                  </div>
+                  <div class="form-group pt-2">
+                    <select class="form-control" name="sel" id="productSelect" style="background-color: black;border: 1px solid rgba(255, 255, 255, 0.1);color: rgba(249, 249, 249, 0.514);">
+                      <option value="default" disabled selected>Select a course...</option>
+                      {% for i in course %}
+                      <option value="{{i.id}}">{{i.course_name}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Upload Photo</label>
+                    <input type="file" name="img1" class="form-control" style="padding-bottom: 35px;" required>
+                  </div>
+                <div style="text-align: center;">
+                <button type="submit" class="btn btn-success mt-2">Add Teacher</button>
+              </div>
+              </form>
+          </div>
+        </div>
+      </div>
+{% endblock %}

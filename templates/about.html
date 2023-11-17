@@ -1,0 +1,32 @@
+{% extends 'navbar.html' %}
+{% block content %}
+{% load static %}
+      <div class="card-deck mt-3 pt-0 ml-5 mr-5 pb-3">
+        <div class="card pt-3 mt-0 pb-4 pr-5 pl-5" style="background-color: rgba(255, 255, 255, 0.057);text-align: center;">
+          <div class="container-fluid mt-3">
+            {% if welcome_message %}
+                <div class="alert alert-success" style="font-size: 25px;">{{ welcome_message }}</div>
+            {% endif %}
+            <div class="card-deck mt-4 ml-3 mr-3">
+              <div class="card" style="text-align: center;background-color: rgba(255, 255, 255, 0.676);">
+                <img class="card-img-top" src="{% static 'images/img1012.jpg' %}" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Edit Profile</h5></div>
+                <div class="card-footer" style="text-align: center;">
+                  <a type="button" class="btn btn-success" href="{% url 'edit_tcr' %}">Edit</a>
+                </div>
+              </div>
+              <div class="card" style="text-align: center;background-color: rgba(255, 255, 255, 0.676);">
+                <img class="card-img-top" src="{% static 'images/img1011.jpg' %}" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Your Profile</h5></div>
+                <div class="card-footer" style="text-align: center;">
+                  <a type="button" class="btn btn-success" href="{% url 'showteacher' %}">Click here</a>
+                </div>
+              </div>
+              </div>
+          </div>
+        </div>
+      </div>
+{% endblock %}
+

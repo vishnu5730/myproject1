@@ -1,0 +1,77 @@
+{% extends 'navbar.html' %}
+{% block content %}
+<style>
+    .image-column {
+      max-width: 300px;
+    }
+  </style>
+      <div class="card-deck mt-3 pt-2 ml-0 mr-0 pb-2 d-none d-md-block">
+        <div class="card pt-3 mt-0 pb-4 pr-0 pl-0" style="background-color: rgba(255, 255, 255, 0.164);">
+          <div class="container-fluid mt-3">
+            <h3 class="text pb-2 text-center" style="color: rgba(25, 25, 25, 0.831);">TEACHERS LIST</h3>
+            <table class="table table-striped table-dark text-center">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Phone Number</th>
+                    <th scope="col">Photo</th>
+                    <th scope="col" colspan="2">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for i in tcr %}
+                  <tr>
+                    <td>{{i.user.first_name}} {{i.user.last_name}}</td>
+                    <td>{{i.user.username}}</td>
+                    <td>{{i.user.email}}</td>
+                    <td>{{i.address}}</td>
+                    <td>{{i.age}}</td>
+                    <td>{{i.phone_number}}</td>
+                    <td class="image-column"><img src="{{i.image.url}}" class="w-25"></td>
+                    <td><a href="{% url 'delete_tcr' i.id %}" style="color: red;">Delete</a></td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="card-deck mt-3 pt-2 ml-3 mr-3 pb-2 d-md-none">
+        <div class="card pt-3 mt-0 pb-4 pr-3 pl-3" style="background-color: rgba(255, 255, 255, 0.164);">
+          <div class="container-fluid mt-3">
+            <table class="table table-striped table-dark table-responsive">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Username</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Address</th>
+                  <th scope="col">Age</th>
+                  <th scope="col">Phone Number</th>
+                  <th scope="col">Photo</th>
+                  <th scope="col" colspan="2">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for i in tcr %}
+                <tr>
+                  <td>{{i.user.first_name}} {{i.user.last_name}}</td>
+                  <td>{{i.user.username}}</td>
+                  <td>{{i.user.email}}</td>
+                  <td>{{i.address}}</td>
+                  <td>{{i.age}}</td>
+                  <td>{{i.phone_number}}</td>
+                  <td class="image-column"><img src="{{i.image.url}}" class="w-25"></td>
+                  <td><a href="{% url 'delete_tcr' i.id %}" style="color: red;">Delete</a></td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+{% endblock %}
